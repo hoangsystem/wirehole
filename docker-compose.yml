@@ -30,10 +30,10 @@ services:
       - 10.2.0.200
     environment:
       TZ: "Asia/Ho_Chi_Minh"
-      FTLCONF_webserver_api_password: ""
-      ServerIP: 10.2.0.100
-      DNS1: 10.2.0.200
-      DNS2: 10.2.0.200
+      FTLCONF_webserver_api_password: "" # Blank password - Can be whatever you want.
+      ServerIP: 10.2.0.100 # Internal IP of pihole
+      DNS1: 10.2.0.200 # Unbound IP
+      DNS2: 10.2.0.200 # If we don't specify two, it will auto pick google.
     volumes:
       - ./etc-pihole:/etc/pihole/
       - ./etc-dnsmasq.d:/etc/dnsmasq.d/
@@ -48,8 +48,8 @@ services:
     image: ghcr.io/wg-easy/wg-easy:latest
     container_name: wg-easy
     environment:
-      - WG_HOST=my.ddns.net
-      - PASSWORD_HASH=YOUR_BCRYPT_HASH
+      - WG_HOST=my.ddns.net # Change this to your host's public address
+      - PASSWORD_HASH=YOUR_BCRYPT_HASH # Change this to your bcrypt hash
       - WG_PORT=51820
       - WG_DEFAULT_ADDRESS=10.6.0.x
       - WG_DEFAULT_DNS=10.2.0.100
@@ -66,8 +66,8 @@ services:
       - net.ipv4.ip_forward=1
       - net.ipv4.conf.all.src_valid_mark=1
     dns:
-      - 10.2.0.100
-      - 10.2.0.200
+      - 10.2.0.100 # Points to pihole
+      - 10.2.0.200 # Points to unbound
     networks:
       private_network:
         ipv4_address: 10.2.0.3
