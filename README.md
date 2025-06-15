@@ -26,7 +26,7 @@ WireHole UI là một dự án mã nguồn mở triển khai hệ thống VPN b�
 
 ```bash
 git clone https://github.com/hoangsystem/wirehole.git
-cd wirehole-ui
+cd wirehole
 ```
 
 ### 2. Cấu hình
